@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tabOne"
+        android:enabled="true"
+        android:icon="@drawable/ic_library_books_black_24dp"
+        android:title="@string/book_1"/>
+    <item
+        android:id="@+id/tabTwo"
+        android:enabled="true"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/book_2"/>
+</menu>

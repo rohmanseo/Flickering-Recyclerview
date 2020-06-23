@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Fix Recyclerview Blink</string>
+    <string name="desc">Desc</string>
+    <string name="title">Title</string>
+    <string name="book_1">without differ</string>
+    <string name="book_2">using differ</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
