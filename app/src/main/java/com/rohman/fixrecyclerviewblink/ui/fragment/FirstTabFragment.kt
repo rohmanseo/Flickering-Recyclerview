@@ -1,7 +1,6 @@
 package com.rohman.fixrecyclerviewblink.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +16,14 @@ import com.rohman.fixrecyclerviewblink.viewmodel.FirstViewmodel
 
 class FirstTabFragment : Fragment() {
 
-    private lateinit var binding: FragmentTabFirstBinding
-    private lateinit var adapter: BookAdapter
+    private lateinit var bookAdapter: BookAdapter
     private val viewmodel: FirstViewmodel by viewModels()
+
+    companion object {
+        private var firstTabView: View? = null
+        private lateinit var binding: FragmentTabFirstBinding
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +40,20 @@ class FirstTabFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewmodel.getList().observe(requireActivity(), Observer { books ->
+            binding.apply {
+                bookAdapter = BookAdapter(requireActivity())
+                recTabOne.apply {
+                    layoutManager = LinearLayoutManager(requireActivity())
+                    adapter = bookAdapter
+                    setHasFixedSize(true)
+                }
+            }
+
             if (books != null) {
-                Log.d("viewmodelcallback",books.size.toString())
                 binding.apply {
-                    adapter = BookAdapter(requireContext())
-                    adapter.setData(books)
-                    recTabOne.adapter = adapter
-                    recTabOne.layoutManager = LinearLayoutManager(requireContext())
-                    recTabOne.setHasFixedSize(true)
+                    recTabOne.apply {
+                        bookAdapter.setData(books)
+                    }
                 }
             }
         })

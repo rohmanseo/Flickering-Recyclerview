@@ -3,11 +3,12 @@ package com.rohman.fixrecyclerviewblink.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
 import com.rohman.fixrecyclerviewblink.R
 import com.rohman.fixrecyclerviewblink.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
+import com.rohman.fixrecyclerviewblink.navigation.KeepStateNavigator
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,15 +16,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,
-            R.layout.activity_main
-        )
-        bottom_navigation.setupWithNavController(
-            Navigation.findNavController(
-                this,
-                R.id.navHostFragment
-            )
-        )
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        // get fragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
+
+        // setup custom navigator
+        val navigator =
+            KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
+        navController.navigatorProvider += navigator
+
+        // set navigation graph
+        navController.setGraph(R.navigation.nav_graph)
+
+        binding.bottomNav.setupWithNavController(navController)
     }
 }

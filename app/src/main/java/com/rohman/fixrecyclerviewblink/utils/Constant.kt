@@ -1,4 +1,4 @@
-package com.rohman.fixrecyclerviewblink
+package com.rohman.fixrecyclerviewblink.utils
 
 enum class Constant(val value: String){
     ENDPOINT_PROGRAMMING("https://www.googleapis.com/books/v1/volumes?q=programming"),

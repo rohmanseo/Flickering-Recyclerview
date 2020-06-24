@@ -1,4 +1,4 @@
-package com.rohman.fixrecyclerviewblink
+package com.rohman.fixrecyclerviewblink.application
 
 import android.app.Application
 import com.androidnetworking.AndroidNetworking
